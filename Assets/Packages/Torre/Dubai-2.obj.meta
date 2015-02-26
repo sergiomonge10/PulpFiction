@@ -1,0 +1,242 @@
+fileFormatVersion: 2
+guid: d09af8bb79f26f8478d17708aa21a125
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SketchUp_group_0 ID103
+    100004: SketchUp_group_0 ID111
+    100006: SketchUp_group_0 ID119
+    100008: SketchUp_group_0 ID127
+    100010: SketchUp_group_0 ID135
+    100012: SketchUp_group_0 ID143
+    100014: SketchUp_group_0 ID151
+    100016: SketchUp_group_0 ID159
+    100018: SketchUp_group_0 ID16
+    100020: SketchUp_group_0 ID167
+    100022: SketchUp_group_0 ID175
+    100024: SketchUp_group_0 ID183
+    100026: SketchUp_group_0 ID191
+    100028: SketchUp_group_0 ID199
+    100030: SketchUp_group_0 ID207
+    100032: SketchUp_group_0 ID215
+    100034: SketchUp_group_0 ID223
+    100036: SketchUp_group_0 ID231
+    100038: SketchUp_group_0 ID239
+    100040: SketchUp_group_0 ID247
+    100042: SketchUp_group_0 ID255
+    100044: SketchUp_group_0 ID263
+    100046: SketchUp_group_0 ID271
+    100048: SketchUp_group_0 ID279
+    100050: SketchUp_group_0 ID287
+    100052: SketchUp_group_0 ID29
+    100054: SketchUp_group_0 ID295
+    100056: SketchUp_group_0 ID3
+    100058: SketchUp_group_0 ID39
+    100060: SketchUp_group_0 ID47
+    100062: SketchUp_group_0 ID55
+    100064: SketchUp_group_0 ID63
+    100066: SketchUp_group_0 ID71
+    100068: SketchUp_group_0 ID79
+    100070: SketchUp_group_0 ID87
+    100072: SketchUp_group_0 ID95
+    400000: //RootNode
+    400002: SketchUp_group_0 ID103
+    400004: SketchUp_group_0 ID111
+    400006: SketchUp_group_0 ID119
+    400008: SketchUp_group_0 ID127
+    400010: SketchUp_group_0 ID135
+    400012: SketchUp_group_0 ID143
+    400014: SketchUp_group_0 ID151
+    400016: SketchUp_group_0 ID159
+    400018: SketchUp_group_0 ID16
+    400020: SketchUp_group_0 ID167
+    400022: SketchUp_group_0 ID175
+    400024: SketchUp_group_0 ID183
+    400026: SketchUp_group_0 ID191
+    400028: SketchUp_group_0 ID199
+    400030: SketchUp_group_0 ID207
+    400032: SketchUp_group_0 ID215
+    400034: SketchUp_group_0 ID223
+    400036: SketchUp_group_0 ID231
+    400038: SketchUp_group_0 ID239
+    400040: SketchUp_group_0 ID247
+    400042: SketchUp_group_0 ID255
+    400044: SketchUp_group_0 ID263
+    400046: SketchUp_group_0 ID271
+    400048: SketchUp_group_0 ID279
+    400050: SketchUp_group_0 ID287
+    400052: SketchUp_group_0 ID29
+    400054: SketchUp_group_0 ID295
+    400056: SketchUp_group_0 ID3
+    400058: SketchUp_group_0 ID39
+    400060: SketchUp_group_0 ID47
+    400062: SketchUp_group_0 ID55
+    400064: SketchUp_group_0 ID63
+    400066: SketchUp_group_0 ID71
+    400068: SketchUp_group_0 ID79
+    400070: SketchUp_group_0 ID87
+    400072: SketchUp_group_0 ID95
+    2300000: SketchUp_group_0 ID103
+    2300002: SketchUp_group_0 ID111
+    2300004: SketchUp_group_0 ID119
+    2300006: SketchUp_group_0 ID127
+    2300008: SketchUp_group_0 ID135
+    2300010: SketchUp_group_0 ID143
+    2300012: SketchUp_group_0 ID151
+    2300014: SketchUp_group_0 ID159
+    2300016: SketchUp_group_0 ID16
+    2300018: SketchUp_group_0 ID167
+    2300020: SketchUp_group_0 ID175
+    2300022: SketchUp_group_0 ID183
+    2300024: SketchUp_group_0 ID191
+    2300026: SketchUp_group_0 ID199
+    2300028: SketchUp_group_0 ID207
+    2300030: SketchUp_group_0 ID215
+    2300032: SketchUp_group_0 ID223
+    2300034: SketchUp_group_0 ID231
+    2300036: SketchUp_group_0 ID239
+    2300038: SketchUp_group_0 ID247
+    2300040: SketchUp_group_0 ID255
+    2300042: SketchUp_group_0 ID263
+    2300044: SketchUp_group_0 ID271
+    2300046: SketchUp_group_0 ID279
+    2300048: SketchUp_group_0 ID287
+    2300050: SketchUp_group_0 ID29
+    2300052: SketchUp_group_0 ID295
+    2300054: SketchUp_group_0 ID3
+    2300056: SketchUp_group_0 ID39
+    2300058: SketchUp_group_0 ID47
+    2300060: SketchUp_group_0 ID55
+    2300062: SketchUp_group_0 ID63
+    2300064: SketchUp_group_0 ID71
+    2300066: SketchUp_group_0 ID79
+    2300068: SketchUp_group_0 ID87
+    2300070: SketchUp_group_0 ID95
+    3300000: SketchUp_group_0 ID103
+    3300002: SketchUp_group_0 ID111
+    3300004: SketchUp_group_0 ID119
+    3300006: SketchUp_group_0 ID127
+    3300008: SketchUp_group_0 ID135
+    3300010: SketchUp_group_0 ID143
+    3300012: SketchUp_group_0 ID151
+    3300014: SketchUp_group_0 ID159
+    3300016: SketchUp_group_0 ID16
+    3300018: SketchUp_group_0 ID167
+    3300020: SketchUp_group_0 ID175
+    3300022: SketchUp_group_0 ID183
+    3300024: SketchUp_group_0 ID191
+    3300026: SketchUp_group_0 ID199
+    3300028: SketchUp_group_0 ID207
+    3300030: SketchUp_group_0 ID215
+    3300032: SketchUp_group_0 ID223
+    3300034: SketchUp_group_0 ID231
+    3300036: SketchUp_group_0 ID239
+    3300038: SketchUp_group_0 ID247
+    3300040: SketchUp_group_0 ID255
+    3300042: SketchUp_group_0 ID263
+    3300044: SketchUp_group_0 ID271
+    3300046: SketchUp_group_0 ID279
+    3300048: SketchUp_group_0 ID287
+    3300050: SketchUp_group_0 ID29
+    3300052: SketchUp_group_0 ID295
+    3300054: SketchUp_group_0 ID3
+    3300056: SketchUp_group_0 ID39
+    3300058: SketchUp_group_0 ID47
+    3300060: SketchUp_group_0 ID55
+    3300062: SketchUp_group_0 ID63
+    3300064: SketchUp_group_0 ID71
+    3300066: SketchUp_group_0 ID79
+    3300068: SketchUp_group_0 ID87
+    3300070: SketchUp_group_0 ID95
+    4300000: SketchUp_group_0 ID103
+    4300002: SketchUp_group_0 ID111
+    4300004: SketchUp_group_0 ID119
+    4300006: SketchUp_group_0 ID127
+    4300008: SketchUp_group_0 ID135
+    4300010: SketchUp_group_0 ID143
+    4300012: SketchUp_group_0 ID151
+    4300014: SketchUp_group_0 ID159
+    4300016: SketchUp_group_0 ID16
+    4300018: SketchUp_group_0 ID167
+    4300020: SketchUp_group_0 ID175
+    4300022: SketchUp_group_0 ID183
+    4300024: SketchUp_group_0 ID191
+    4300026: SketchUp_group_0 ID199
+    4300028: SketchUp_group_0 ID207
+    4300030: SketchUp_group_0 ID215
+    4300032: SketchUp_group_0 ID223
+    4300034: SketchUp_group_0 ID231
+    4300036: SketchUp_group_0 ID239
+    4300038: SketchUp_group_0 ID247
+    4300040: SketchUp_group_0 ID255
+    4300042: SketchUp_group_0 ID263
+    4300044: SketchUp_group_0 ID271
+    4300046: SketchUp_group_0 ID279
+    4300048: SketchUp_group_0 ID287
+    4300050: SketchUp_group_0 ID29
+    4300052: SketchUp_group_0 ID295
+    4300054: SketchUp_group_0 ID3
+    4300056: SketchUp_group_0 ID39
+    4300058: SketchUp_group_0 ID47
+    4300060: SketchUp_group_0 ID55
+    4300062: SketchUp_group_0 ID63
+    4300064: SketchUp_group_0 ID71
+    4300066: SketchUp_group_0 ID79
+    4300068: SketchUp_group_0 ID87
+    4300070: SketchUp_group_0 ID95
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
