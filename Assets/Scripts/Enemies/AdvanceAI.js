@@ -69,7 +69,7 @@ function chase ()
 	//	animation.Play("Demon Chase", PlayMode.StopAll);
 	//}
 	anim.SetBool ("IsWalking", true);
-	anim.SetBool ("IsHidding", false);
+	anim.SetBool ("IsHitting", false);
 	transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 }
 
