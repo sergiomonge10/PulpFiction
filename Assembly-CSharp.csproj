@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\ULTIMATE\Enemies\EnemyAttack.cs" />
      <Compile Include="Assets\Scripts\ULTIMATE\Enemies\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\ULTIMATE\Enemies\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\ULTIMATE\Player\Movement.cs" />
      <Compile Include="Assets\Scripts\ULTIMATE\Player\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\ULTIMATE\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\ULTIMATE\Player\PlayerShooting.cs" />

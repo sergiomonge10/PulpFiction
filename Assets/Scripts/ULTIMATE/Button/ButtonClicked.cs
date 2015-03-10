@@ -16,4 +16,8 @@ public class ButtonClicked : MonoBehaviour {
 	public void clicked(){
 		Application.LoadLevel("Scene01");
 	}
+
+	public void clickedExit(){
+		Application.Quit();
+	}
 }
