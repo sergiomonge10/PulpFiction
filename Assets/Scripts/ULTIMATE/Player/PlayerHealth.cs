@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
-
+	double Timer = 0.0;
 
     void Awake ()
     {
@@ -29,15 +29,24 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent <PlayerMovement> ();
         playerShooting = GetComponentInChildren <PlayerShooting> ();
         currentHealth = startingHealth;
+		StartCoroutine(addHealth());
     }
 
 
     void Update ()
     {
+		Timer += Time.deltaTime; //Time.deltaTime will increase the value with 1 every second.
+		// If the player has just been damaged...
+		
+		if(Timer >= 5.0){
+			Timer = 0.0;
+		}
+
         if(damaged)
         {
             damageImage.color = flashColour;
 			skull.color = Color.red; 
+			Timer = 0.0;
         }
         else
         {
@@ -87,4 +96,22 @@ public class PlayerHealth : MonoBehaviour
     {
         Application.LoadLevel (Application.loadedLevel);
     }
+
+	IEnumerator addHealth ()//Add health to the ship shield
+	{
+		while (true){ // loops forever...
+			if(!damaged && Timer >= 4.0){
+				if (currentHealth < 100){ // if health < 100...
+					// yield new WaitForSeconds(5);
+					currentHealth += 10; // increase health and wait the specified time
+					healthSlider.value = currentHealth;
+				} else { 
+					yield return null;
+				}
+			}else{
+				yield return null;
+				
+			}
+		}
+	}
 }

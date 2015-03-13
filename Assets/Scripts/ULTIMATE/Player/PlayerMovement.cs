@@ -42,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit floorHit;
-		Debug.Log(floorMask);
-		Debug.Log(camRay);
-		Debug.Log(camRayLenght);
+//		Debug.Log(floorMask);
+//		Debug.Log(camRay);
+//		Debug.Log(camRayLenght);
 		if(Physics.Raycast(camRay, out floorHit, camRayLenght, floorMask))
 		{
 			Debug.Log("MAE");

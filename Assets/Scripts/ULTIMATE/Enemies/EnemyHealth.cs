@@ -16,7 +16,6 @@ public class EnemyHealth : MonoBehaviour
     bool isDead;
     bool isSinking;
 
-
     void Awake ()
     {
         anim = GetComponent <Animator> ();
@@ -25,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider = GetComponent <CapsuleCollider> ();
 
         currentHealth = startingHealth;
+
     }
 
 
