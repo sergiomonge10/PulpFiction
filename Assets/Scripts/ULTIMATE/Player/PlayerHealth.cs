@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 	private List<GameObject> attackers;
 	public int simultaneousAttackers = 2;
-	
+	public float recuperationSpeed=6.0f;
+
 	Animator anim;
 	AudioSource playerAudio;
 	PlayerMovement playerMovement;
@@ -83,13 +84,6 @@ public class PlayerHealth : MonoBehaviour
 	{
 		isDead = true;
 		
-		//playerShooting.DisableEffects ();
-		
-		//anim.SetTrigger ("Die");
-		
-		//playerAudio.clip = deathClip;
-		//playerAudio.Play ();
-		
 		playerMovement.enabled = false;
 		playerShooting.enabled = false;
 		
@@ -110,15 +104,11 @@ public class PlayerHealth : MonoBehaviour
 			if(!attackers.Contains(requestor)){
 				attackers.Add(requestor);
 			}
-			Debug.Log("Permiso concedido");
 			return true;
-			//Debug.Log("Attack accepted, current attackers: " + attackers.Count);
 		}
 		else
 		{
-			Debug.Log("Permiso no concedido");
 			return false;
-			//Debug.Log("Attack REJECTED, current attackers: " + attackers.Count);
 		}
 	}
 	
@@ -130,7 +120,7 @@ public class PlayerHealth : MonoBehaviour
 	IEnumerator addHealth ()//Add health to the ship shield
 	{
 		while (true){ // loops forever...
-			if(!damaged && Timer >= 4.0){
+			if(!damaged && Timer >= recuperationSpeed){
 				if (currentHealth < 100){ // if health < 100...
 					// yield new WaitForSeconds(5);
 					currentHealth += 10; // increase health and wait the specified time

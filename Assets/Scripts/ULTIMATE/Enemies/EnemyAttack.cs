@@ -79,7 +79,6 @@ public class EnemyAttack : MonoBehaviour
 						avoider.lastReact = Time.fixedTime;
 						if (isAttacking) {
 							distance = Vector3.Distance (player.transform.position, transform.position);
-							Debug.Log(distance);
 							if(canAttack (distance)){
 								Debug.Log("atacando");
 								Attack ();

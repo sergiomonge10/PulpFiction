@@ -9,6 +9,7 @@ public class EnemyManager2 : MonoBehaviour {
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	public int quantity= 10;
 	public int timerSeconds = 10;
+	private bool enemiesHaveSpawn = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -19,38 +20,33 @@ public class EnemyManager2 : MonoBehaviour {
 	
 	}
 
-	void Spawn ()
+	void Spawn (int spawnPointIndex)
 	{
+
+		waitToSpawn();
 		// If the player has no health left...
 		if(playerHealth.currentHealth <= 0f)
 		{
-			// ... exit the function.
 			return;
 		}
-		
-		// Find a random index between zero and one less than the number of spawn points.
-		int spawnPointIndex   = Random.Range (0, spawnPoints.Length);
-		Debug.Log (spawnPointIndex);
+
 		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 		Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-		Debug.Log("Instatiate enemy");
-		
 	}
 
 	void OnTriggerEnter (Collider player) {
-
-		if(player.tag == "Player"){
+		if(player.tag == "Player" && !enemiesHaveSpawn){
 			for (int i=0; i < quantity; i++){
-				Debug.Log("Entre al ciclo");
-				//InvokeRepeating ("Spawn", spawnTime, spawnTime);
-				Invoke ("Spawn",spawnTime);
-				waitToSpawn();
+				int enemySpawnPoint = i%spawnPoints.Length;
+				Spawn(enemySpawnPoint);
+
 			}
+			enemiesHaveSpawn = true;
 		}
-		Debug.Log("Sali del ciclo");
+		Debug.Log("Spawnie mis enemigos");
 	}
 
 	IEnumerable waitToSpawn(){
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(timerSeconds);
 	}
 }
