@@ -40,7 +40,7 @@ function thePauseMenu() {
     
     //main menu return button (level 0)
     if(GUI.Button(Rect(55, 150, 180, 40), "Main Menu")) {
-    Application.LoadLevel(1);
+    Application.LoadLevel(0);
     }
     
     //quit button
