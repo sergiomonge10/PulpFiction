@@ -40,7 +40,7 @@ public class EnemyManager2 : MonoBehaviour {
 	void OnTriggerEnter (Collider player) {
 
 		if(player.tag == "Player"){
-			for (int i=0; i < 5; i++){
+			for (int i=0; i < quantity; i++){
 				Debug.Log("Entre al ciclo");
 				//InvokeRepeating ("Spawn", spawnTime, spawnTime);
 				Invoke ("Spawn",spawnTime);
@@ -51,6 +51,6 @@ public class EnemyManager2 : MonoBehaviour {
 	}
 
 	IEnumerable waitToSpawn(){
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(10);
 	}
 }
