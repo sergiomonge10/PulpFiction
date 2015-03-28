@@ -13,11 +13,11 @@ public class ButtonClicked : MonoBehaviour {
 	
 	}
 
-	public void clicked(){
+	public void LoadScene1(){
 		Application.LoadLevel("Scene01");
 	}
 
-	public void clickedExit(){
-		Application.Quit();
+	public void LoadPlayerSelection(){
+		Application.LoadLevel("menuMultiPlayer");
 	}
 }

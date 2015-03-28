@@ -8,10 +8,12 @@ public class Movement : MonoBehaviour {
 	public Animator anim;
 	public CharacterController controller;
 	private Vector3 moveDirection = Vector3.zero;
+	public bool value;
 
 	void Start() {
 		anim = GetComponent<Animator> ();
 		controller = GetComponent<CharacterController>();
+		value = false;
 	}
 
 	void Update() { 
@@ -19,13 +21,16 @@ public class Movement : MonoBehaviour {
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
-			if (Input.GetButton("Jump"))
+			if (Input.GetButton("Jump")){
 				moveDirection.y = jumpSpeed;
-			if (Input.GetButton("Vertical") || Input.GetButton("Horizantal"))
-				anim.SetBool("IsWalking",true);
-			else
-				anim.SetBool("IsWalking",false);
-			
+			}
+			if (Input.GetButton("Vertical") || Input.GetButton("Horizontal")){
+				value = true;
+				anim.SetBool("IsWalking",value);
+			}else if (!Input.GetButton("Vertical") || !Input.GetButton("Horizantal")){
+				value= false;
+				anim.SetBool("IsWalking",value);
+			}
 		}
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.SimpleMove (Physics.gravity);

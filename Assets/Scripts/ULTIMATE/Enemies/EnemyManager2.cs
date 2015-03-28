@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyManager2 : MonoBehaviour {
-
+	
 	public PlayerHealth playerHealth;       // Reference to the player's heatlh.
 	public GameObject enemy;                // The enemy prefab to be spawned.
 	public float spawnTime= 8f;            // How long between each spawn.
@@ -10,42 +10,43 @@ public class EnemyManager2 : MonoBehaviour {
 	public int quantity= 10;
 	public int timerSeconds = 10;
 	private bool enemiesHaveSpawn = false;
-
+	
 	// Use this for initialization
 	void Awake () {
+		playerHealth= (PlayerHealth)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	void Spawn (int spawnPointIndex)
 	{
-
+		
 		waitToSpawn();
 		// If the player has no health left...
 		if(playerHealth.currentHealth <= 0f)
 		{
 			return;
 		}
-
+		
 		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 		Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 	}
-
+	
 	void OnTriggerEnter (Collider player) {
 		if(player.tag == "Player" && !enemiesHaveSpawn){
 			for (int i=0; i < quantity; i++){
 				int enemySpawnPoint = i%spawnPoints.Length;
 				Spawn(enemySpawnPoint);
-
+				
 			}
 			enemiesHaveSpawn = true;
 		}
 		Debug.Log("Spawnie mis enemigos");
 	}
-
+	
 	IEnumerable waitToSpawn(){
 		yield return new WaitForSeconds(timerSeconds);
 	}
