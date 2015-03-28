@@ -6,7 +6,8 @@ public class HitScript : MonoBehaviour {
 	private Animator anim;
 	private BossCharging bossCharging;
 	private GameObject player;
-	private int damage= 1;
+	private PlayerHealth playerHealth;
+	private int damage= 50;
 	public bool hitting{ get; set;}
 	// Use this for initialization
 
@@ -15,20 +16,24 @@ public class HitScript : MonoBehaviour {
 		anim = boss.GetComponent<Animator>();
 		bossCharging = boss.GetComponent<BossCharging> ();
 		player= GameObject.FindGameObjectWithTag("Player");
+		if (player != null) {
+			playerHealth = (PlayerHealth) player.GetComponent<PlayerHealth>();
+		}
 		hitting = false;
 	}
 	
 	// Update is called once per frame
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == "Player") {
-			anim.SetBool("Charging", false);
+			anim.SetBool ("Charging", false);
 			//anim.SetBool("Hit",true);
-			Debug.Log("Choco contra jugador");
+			Debug.Log ("Choco contra jugador");
 			//bossCharging.charging = false;
-			player.BroadcastMessage ("ApplyDammage",damage);
-			hitting =true;
+			if(playerHealth!=null && playerHealth.currentHealth > 0){
+				playerHealth.TakeDamage (damage, gameObject);
+			}
 
-		}	
+		}
 	}
 
 

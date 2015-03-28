@@ -75,8 +75,10 @@ public class PlayerHealth : MonoBehaviour
 		{
 			Death ();
 		}
-		
-		attackers.Remove (attacker);
+		if (attacker.tag == "Demon") {
+			attackers.Remove (attacker);
+		}
+
 		
 		return true;
 	}
@@ -86,10 +88,11 @@ public class PlayerHealth : MonoBehaviour
 	{
 		isDead = true;
 		
-		playerMovement.enabled = false;
-		playerShooting.enabled = false;
-		
-		Destroy (gameObject, 2f);
+		//playerMovement.enabled = false;
+		//playerShooting.enabled = false;
+		anim.SetBool ("Die", true);
+		//Debug.Log(anim.GetCurrentAnimatorStateInfo(0).fullPathHash());
+		//Destroy (gameObject, 2f);
 	}
 	
 	

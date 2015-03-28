@@ -61,12 +61,12 @@ public class BossHealth : MonoBehaviour
 		isDead = true;
 		
 		//capsuleCollider.isTrigger = true;
-		
-		anim.SetTrigger ("Dead");
-		
-		Destroy (gameObject, 2f);
-
+		//Destroy (gameObject, 2f);
 		anim.SetBool ("Death", true);
+		/**
+		if (!anim.GetCurrentAnimatorStateInfo ().IsName ("Boss1_death")) {
+			Destroy (gameObject, 2f);
+		}**/
 		//enemyAudio.clip = deathClip;
 		//enemyAudio.Play ();
 	}
