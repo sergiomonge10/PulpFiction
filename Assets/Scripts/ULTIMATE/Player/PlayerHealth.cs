@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public int startingHealth = 10;
+	public int startingHealth = 100;
 	public int currentHealth;
 	public Slider healthSlider;
 	public Image damageImage;
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
 	private List<GameObject> attackers;
 	public int simultaneousAttackers = 2;
 	public float recuperationSpeed=6.0f;
-
+	
 	Animator anim;
 	AudioSource playerAudio;
 	PlayerMovement playerMovement;
@@ -35,9 +35,7 @@ public class PlayerHealth : MonoBehaviour
 		attackers = new List<GameObject>();
 		StartCoroutine(addHealth());
 	}
-	bool IsDead(){
-		return isDead;
-	}
+	
 	
 	void Update ()
 	{
@@ -63,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
 	}
 	
 	
-	public void TakeDamage (int amount,GameObject attacker)
+	public bool TakeDamage (int amount,GameObject attacker)
 	{
 		damaged = true;
 		
@@ -79,6 +77,8 @@ public class PlayerHealth : MonoBehaviour
 		}
 		
 		attackers.Remove (attacker);
+		
+		return true;
 	}
 	
 	
@@ -88,7 +88,6 @@ public class PlayerHealth : MonoBehaviour
 		
 		playerMovement.enabled = false;
 		playerShooting.enabled = false;
-		anim.SetBool ("Die", true);
 		
 		Destroy (gameObject, 2f);
 	}

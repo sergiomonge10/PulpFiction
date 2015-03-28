@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyManager2 : MonoBehaviour {
 	
-	public PlayerHealth playerHealth;       // Reference to the player's heatlh.
+	private PlayerHealth playerHealth;       // Reference to the player's heatlh.
 	public GameObject enemy;                // The enemy prefab to be spawned.
 	public float spawnTime= 8f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
@@ -13,7 +13,10 @@ public class EnemyManager2 : MonoBehaviour {
 	
 	// Use this for initialization
 	void Awake () {
-		playerHealth= (PlayerHealth)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		if (player != null) {
+			playerHealth = (PlayerHealth)player.GetComponent<PlayerHealth> ();
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,7 +29,7 @@ public class EnemyManager2 : MonoBehaviour {
 		
 		waitToSpawn();
 		// If the player has no health left...
-		if(playerHealth.currentHealth <= 0f)
+		if(playerHealth!=null && playerHealth.currentHealth <= 0f)
 		{
 			return;
 		}

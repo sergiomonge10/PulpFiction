@@ -56,11 +56,11 @@ public class AICoordinator : MonoBehaviour {
 				continue;
 			}
 			
-			ai.dangerDistance = dangerDistance;
-			ai.attackDistance = attackDistance;
-			ai.attackRate = attackRate;
-			ai.attackRateFluctuation = attackRateFluctuation;
-
+			//ai.dangerDistance = dangerDistance;
+			//ai.attackDistance = attackDistance;
+			//ai.attackRate = attackRate;
+			//ai.attackRateFluctuation = attackRateFluctuation;
+			
 		}
 		
 		foreach(int j in dead)
