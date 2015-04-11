@@ -5,7 +5,7 @@ public class PlayerShooting : MonoBehaviour
     public int damagePerShot = 20;
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
-
+	public int current_bullets = 100; 
 
     float timer;
     Ray shootRay;
@@ -16,7 +16,6 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
-
 
     void Awake ()
     {
@@ -34,7 +33,9 @@ public class PlayerShooting : MonoBehaviour
 
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            Shoot ();
+			if(current_bullets > 0){
+            	Shoot ();
+			}
         }
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
@@ -65,6 +66,8 @@ public class PlayerShooting : MonoBehaviour
         gunLine.enabled = true;
         gunLine.SetPosition (0, transform.position);
 
+		current_bullets = current_bullets - 1;
+
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
 
@@ -92,4 +95,10 @@ public class PlayerShooting : MonoBehaviour
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
         }
     }
+
+	public void RecargeBullets (int recharge){
+		if (current_bullets < 500) { 
+			current_bullets = current_bullets + recharge;
+		}
+	}
 }
