@@ -67,6 +67,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine.SetPosition (0, transform.position);
 
 		current_bullets = current_bullets - 1;
+		ScoreManager.bullets = current_bullets;
 
         shootRay.origin = transform.position;
         shootRay.direction = transform.forward;
@@ -99,6 +100,7 @@ public class PlayerShooting : MonoBehaviour
 	public void RecargeBullets (int recharge){
 		if (current_bullets < 500) { 
 			current_bullets = current_bullets + recharge;
+			ScoreManager.bullets = current_bullets;
 		}
 	}
 }
