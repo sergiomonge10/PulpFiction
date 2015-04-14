@@ -83,9 +83,9 @@ public class PlayerShooting : MonoBehaviour
 					gunLine.SetPosition (1, shootHit.point);
 				}
 			}
-			if (shootHit.transform.parent.gameObject.tag == "Boss") {
+			if (shootHit.collider.tag == "Boss") {
 				if (bossHealth != null) {
-						Debug.Log("Pegando al boss");
+					Debug.Log("Pegando al boss");
 					bossHealth.TakeDamage (damagePerShot, shootHit.point);
 					gunLine.SetPosition (1, shootHit.point);
 				}
