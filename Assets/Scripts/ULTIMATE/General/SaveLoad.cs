@@ -58,4 +58,8 @@ public class SaveLoad : MonoBehaviour {
 			Debug.Log("LOAD POS");
 		}
 	}
+
+	public void LoadSavedLevel(){
+		Application.LoadLevel(PlayerPrefs.GetInt("LevelName"));
+	}
 }

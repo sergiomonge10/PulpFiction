@@ -8,22 +8,10 @@ public class PauseMenuScript : MonoBehaviour {
 	bool isPaused = false;
 
 	void Start () {
-
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
-		continueBtn = GameObject.FindGameObjectWithTag ("ContinueButton");
 		if (pauseMenu != null) {
 			pauseMenu.SetActive(false);
 		}
-		if (continueBtn != null) { 
-			if (PlayerPrefs.GetInt ("LevelName") > 1) {
-				continueBtn.SetActive (true);
-			} else if (PlayerPrefs.GetFloat ("PlayerX") > 0) { 
-				continueBtn.SetActive (true);
-			} else {
-				continueBtn.SetActive (false);
-			}
-		}
-
 	}
 	
 	// Update is called once per frame
