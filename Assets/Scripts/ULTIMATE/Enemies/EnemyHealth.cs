@@ -60,9 +60,12 @@ public class EnemyHealth : MonoBehaviour
     {
         isDead = true;
 
+		gameObject.GetComponent<NavMeshAgent> ().enabled = false;
+
         capsuleCollider.isTrigger = true;
 
         anim.SetTrigger ("Dead");
+
 
 		Destroy (gameObject, 2f);
 		
