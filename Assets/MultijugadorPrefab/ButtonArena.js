@@ -1,5 +1,4 @@
 ﻿#pragma strict
-
 function Start () {
 
 }
@@ -7,3 +6,4 @@ function Start () {
 function OnMouseClick(){
 	Application.LoadLevel ("seleccionarArena");
 	}
+	
