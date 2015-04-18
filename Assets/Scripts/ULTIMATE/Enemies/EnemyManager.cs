@@ -17,39 +17,44 @@ public class EnemyManager : MonoBehaviour {
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		if (player != null) {
 			playerHealth = (PlayerHealth)player.GetComponent<PlayerHealth> ();
+			if(playerHealth != null){
+				InvokeRepeating ("SpawnEnemies", timerSeconds, timerSeconds);
+			}
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	}
+
+	void SpawnEnemies ()
+	{
 		if (spawnEnemies && !enemiesHaveSpawn) {
-			if(playerHealth!=null && playerHealth.currentHealth > 0 && spawnPoints.Length > 0)
-			{
-				for (int i=1; i < quantity; i++){
-					int enemySpawnPoint = i%spawnPoints.Length;
-					StartCoroutine("SpawnEnemies",enemySpawnPoint);	
-				}
+
+			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
+			if (playerHealth.currentHealth <= 0 && quantity <= 0) {
+					return;		
+			}
+			for(int i=1; i<spawnPoints.Length+1 ; i++){
+				int enemySpawnPoint = i%spawnPoints.Length;
+				Instantiate (enemy, spawnPoints [enemySpawnPoint].position, spawnPoints [enemySpawnPoint].rotation);
+				quantity--;
+			}
+
+			if(quantity <= 0){
 				enemiesHaveSpawn = true;
 			}
 		}
 	}
-
-	IEnumerator SpawnEnemies (int enemySpawnPoint)
-	{
-
-		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-		Instantiate (enemy, spawnPoints[enemySpawnPoint].position, spawnPoints[enemySpawnPoint].rotation);
-		waitToSpawn();
-
-		// If the player has no health left...
-		yield return null;
-	}
 	
 	void OnTriggerEnter (Collider player) {
 		if(player.tag == "Player" && !enemiesHaveSpawn){
-			spawnEnemies = true;
+			if(spawnPoints.Length > 0 && quantity > 0)
+			{
+				Debug.Log("Starting coroutine");
+				spawnEnemies = true;
+			}
 		}
-		Debug.Log("Spawnie mis enemigos");
 	}
 	
 	IEnumerable waitToSpawn(){
