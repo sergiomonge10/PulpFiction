@@ -29,9 +29,16 @@ public class Movement : MonoBehaviour {
 				if (Input.GetButton("Vertical") || Input.GetButton("Horizontal")){
 					value = true;
 					anim.SetBool("IsWalking",value);
+					if ( Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ){
+						speed = 10.0F;
+						anim.SetBool("isRunning",true);
+					} else {
+						anim.SetBool("isRunning",false);
+					}
 				}else if (!Input.GetButton("Vertical") || !Input.GetButton("Horizantal")){
 					value= false;
 					anim.SetBool("IsWalking",value);
+					anim.SetBool("isRunning",value);
 				}
 			}
 			moveDirection.y -= gravity * Time.deltaTime;
