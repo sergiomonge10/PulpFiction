@@ -8,8 +8,9 @@ public class EnemyManager : MonoBehaviour {
 	public float spawnTime= 8f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	public int quantity= 10;
-	public int timerSeconds = 10;
+	public int timerSeconds = 5;
 	private bool enemiesHaveSpawn = false;
+	private bool spawnEnemies = false;
 	
 	// Use this for initialization
 	void Awake () {
@@ -21,31 +22,32 @@ public class EnemyManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-	
-	void Spawn (int spawnPointIndex)
-	{
-		
-		waitToSpawn();
-		// If the player has no health left...
-		if(playerHealth!=null && playerHealth.currentHealth <= 0f)
-		{
-			return;
+		if (spawnEnemies && !enemiesHaveSpawn) {
+			if(playerHealth!=null && playerHealth.currentHealth > 0 && spawnPoints.Length > 0)
+			{
+				for (int i=1; i < quantity; i++){
+					int enemySpawnPoint = i%spawnPoints.Length;
+					StartCoroutine("SpawnEnemies",enemySpawnPoint);	
+				}
+				enemiesHaveSpawn = true;
+			}
 		}
-		
+	}
+
+	IEnumerator SpawnEnemies (int enemySpawnPoint)
+	{
+
 		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-		Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+		Instantiate (enemy, spawnPoints[enemySpawnPoint].position, spawnPoints[enemySpawnPoint].rotation);
+		waitToSpawn();
+
+		// If the player has no health left...
+		yield return null;
 	}
 	
 	void OnTriggerEnter (Collider player) {
 		if(player.tag == "Player" && !enemiesHaveSpawn){
-			for (int i=0; i < quantity; i++){
-				int enemySpawnPoint = i%spawnPoints.Length;
-				Spawn(enemySpawnPoint);
-				
-			}
-			enemiesHaveSpawn = true;
+			spawnEnemies = true;
 		}
 		Debug.Log("Spawnie mis enemigos");
 	}
