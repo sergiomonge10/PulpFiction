@@ -5,10 +5,10 @@ public class EnemyManager : MonoBehaviour {
 	
 	private PlayerHealth playerHealth;       // Reference to the player's heatlh.
 	public GameObject enemy;                // The enemy prefab to be spawned.
-	public float spawnTime= 8f;            // How long between each spawn.
+	public float spawnTime= 8f; // How long between each spawn.
+	public int quantity= 10; 
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
-	public int quantity= 10;
-	public int timerSeconds = 5;
+
 	private bool enemiesHaveSpawn = false;
 	private bool spawnEnemies = false;
 	
@@ -16,10 +16,7 @@ public class EnemyManager : MonoBehaviour {
 	void Awake () {
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		if (player != null) {
-			playerHealth = (PlayerHealth)player.GetComponent<PlayerHealth> ();
-			if(playerHealth != null){
-				InvokeRepeating ("SpawnEnemies", timerSeconds, timerSeconds);
-			}
+			this.playerHealth = (PlayerHealth)player.GetComponent<PlayerHealth> ();
 		}
 	}
 	
@@ -29,35 +26,27 @@ public class EnemyManager : MonoBehaviour {
 
 	void SpawnEnemies ()
 	{
-		if (spawnEnemies && !enemiesHaveSpawn) {
-
-			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-			if (playerHealth.currentHealth <= 0 && quantity <= 0) {
+		if (this.spawnEnemies && !this.enemiesHaveSpawn) {
+			Debug.Log("Spawning first set of enemies");
+			if (this.playerHealth.currentHealth <= 0) {
 					return;		
 			}
-			for(int i=1; i<spawnPoints.Length+1 ; i++){
+			for(int i=1; i<spawnPoints.Length+1 ; i++){//We instantiate first number of enemies on each spawn point
 				int enemySpawnPoint = i%spawnPoints.Length;
 				Instantiate (enemy, spawnPoints [enemySpawnPoint].position, spawnPoints [enemySpawnPoint].rotation);
-				quantity--;
+				this.quantity--;
 			}
 
-			if(quantity <= 0){
-				enemiesHaveSpawn = true;
+			if(quantity <= 0){//if quantity reach to 0 then we don't have more enemies to spawn
+				this.enemiesHaveSpawn = true;
 			}
 		}
 	}
 	
 	void OnTriggerEnter (Collider player) {
-		if(player.tag == "Player" && !enemiesHaveSpawn){
-			if(spawnPoints.Length > 0 && quantity > 0)
-			{
-				Debug.Log("Starting coroutine");
-				spawnEnemies = true;
-			}
+		if(player.tag == "Player" && !this.spawnEnemies && this.spawnPoints.Length > 0){//We give permission to the coroutine to start spawning
+			this.spawnEnemies = true;
+			InvokeRepeating ("SpawnEnemies", 0.1f, this.spawnTime);
 		}
-	}
-	
-	IEnumerable waitToSpawn(){
-		yield return new WaitForSeconds(timerSeconds);
 	}
 }
