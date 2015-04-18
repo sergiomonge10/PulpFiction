@@ -4,10 +4,12 @@ using System.Collections;
 public class Cartridge : MonoBehaviour {
 
 	int bullets;
+	public int range1 = 1;
+	public int range2 = 100;
 
 	// Use this for initialization
 	void Start () {
-		bullets = Random.Range(1,100);
+		bullets = Random.Range(range1,range2);
 	}
 	
 	// Update is called once per frame
