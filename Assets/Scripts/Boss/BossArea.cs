@@ -17,7 +17,6 @@ public class BossArea : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Player") {
-			Debug.Log("Jonathan es gay");
 			onAttackRange = true;
 		}
 
