@@ -4,8 +4,6 @@ using System.Collections;
 public class PauseMenuScript : MonoBehaviour {
 
 	GameObject pauseMenu = null;
-	GameObject continueBtn = null;
-	bool isPaused = false;
 
 	void Start () {
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");

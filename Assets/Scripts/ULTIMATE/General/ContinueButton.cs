@@ -4,7 +4,6 @@ using System.Collections;
 public class ContinueButton : MonoBehaviour {
 
 	GameObject continueBtn = null;
-	int level = 0;
 	// Use this for initialization
 	void Start () {
 		continueBtn = GameObject.FindGameObjectWithTag ("ContinueButton");
@@ -13,8 +12,6 @@ public class ContinueButton : MonoBehaviour {
 			Debug.Log(PlayerPrefs.GetFloat("PlayerX"));
 			if(PlayerPrefs.GetInt("LevelName") < 1 && PlayerPrefs.GetFloat("PlayerX") <= 0 ){
 				continueBtn.SetActive(false);
-			}else {
-				level = PlayerPrefs.GetInt("LevelName") ;
 			}
 		}
 	}

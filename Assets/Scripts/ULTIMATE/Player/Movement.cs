@@ -42,14 +42,16 @@ public class Movement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		Cartridge comp_clip = other.GetComponent<Cartridge> ();
-		int bullets_to_charge = comp_clip.getClipBullets ();
+		if (comp_clip != null) {
+			int bullets_to_charge = comp_clip.getClipBullets ();
 
-		GameObject gundEnd = GameObject.FindGameObjectWithTag ("GunEnd");
-		PlayerShooting gunScript = gundEnd.GetComponent<PlayerShooting> ();
-		gunScript.RecargeBullets (bullets_to_charge);
+			GameObject gundEnd = GameObject.FindGameObjectWithTag ("GunEnd");
+			PlayerShooting gunScript = gundEnd.GetComponent<PlayerShooting> ();
+			gunScript.RecargeBullets (bullets_to_charge);
 
-		StartCoroutine(Wait(other));
-		//Destroy(other.gameObject);
+			StartCoroutine (Wait (other));
+			//Destroy(other.gameObject);
+		}
 	}
 
 	IEnumerator Wait(Collider other) {

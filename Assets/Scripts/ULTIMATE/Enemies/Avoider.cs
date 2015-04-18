@@ -10,7 +10,6 @@ public class Avoider : MonoBehaviour
 
 	private float thinkPeriod = 1.5f;
 	private float reactPeriod = 1.0f;
-	private Vector3 avoidVec = Vector3.zero;
 	private Vector3 distVec{ get; set;}
 
 	void Awake ()

@@ -6,17 +6,13 @@ public class EnemyAttack : MonoBehaviour
 	
 	public int attackDamage = 1;
 	public float chaseRange = 15.0f;
-	public float rotationDamping = 6.0f;
+	public float rotationDamping = 10.0f;
 	public float attackDistance = 2.0f;
-	public float dangerDistance = 3.0f;
-	public float attackRate = 0.05f;
+	public float dangerDistance = 10.0f;
 	
 	private bool isAttacking = false;
-	private bool hasAttacked = false;
-	private bool playerInRange = false;
 	private float attackTime = 0f;
-	private float distance = 0f;
-	private float awayTime = 0.000001f;
+
 	private EnemyAnimator anim;
 	private GameObject player;
 	private PlayerHealth playerHealth;
@@ -33,92 +29,69 @@ public class EnemyAttack : MonoBehaviour
 		anim = GetComponent <EnemyAnimator> ();
 		navMesh = GetComponent<NavMeshAgent> ();
 		avoider = GetComponent<Avoider> ();
-		attackTime = Time.time;
+		avoider.lastReact = 0.0f;
 		
 	}
 	
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject == player) {//if its the player stop the engage
-			playerInRange = true;
+		//Si es el jugador atacamos si tenemos permisos para atacar
+		if (other.gameObject.CompareTag ("Player") && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {//if its prepare to attack
+			Attack ();
+		} else if (other.gameObject.CompareTag (avoider.packTag) && !isAttacking) {// si es otro enemigo ajustamos las velocidades para que se alejen
+			navMesh.speed = Random.Range (1.0f, 4.0f);
+		} else if (playerHealth.currentHealth < 0) {// si el jugador esta muerto esperamos
 			navMesh.Stop();
-		}
-		else if (collider.gameObject.CompareTag (avoider.packTag)) {//if its another enemy get its position to go away
-			avoider.avoidEnemy = collider.transform;
-			Debug.Log("Colliding with the enemy");
+			anim.wait ();
 		}
 	}
 	
 	void OnTriggerExit (Collider other)
 	{
-		if (other.gameObject == player) {//if its the player stop the engage
-			playerInRange = false;
-		} else if (collider.gameObject.CompareTag (avoider.packTag)) {//if its another enemy then we are cool
-			avoider.avoidEnemy = null;
+		if (other.transform.tag == "Player") {
+			if(playerHealth.currentHealth > 0){//si el jugador esta vivo y se aleja se cambia la velocidad y deja de atacar
+				navMesh.speed =  Random.Range(1.0f,4.0f);
+				navMesh.destination = player.transform.position;
+			}else{// si el jugador esta muerto y se aleja, esperamos
+				navMesh.Stop();
+			}
 		}
 	}
 	
 	void Update (){
-		if (Time.time > attackTime && Time.time > awayTime) {//Si esta attacando o se esta alejando esperamos a que termine la accion
-			distance = Vector3.Distance (player.transform.position, transform.position);
-			if(hasAttacked){
-				moveAway(player.transform.position);
-			}else if (distance < dangerDistance) {
-				isAttacking = playerHealth.RequestAttack(gameObject);
-				if (avoider.ShouldThink ()) {
-					if (avoider.avoidEnemy != null && !isAttacking) {
-						Debug.Log("moviendome lejos de mi companero");
-						moveAway (avoider.avoidEnemy.transform.position);
+		if (Time.time > attackTime) {//Si esta attacando esperamos a que termine la accion
+			if (avoider.ShouldReact ()) {//Wait time para bajar el nivel de requests y procesamiento
+				Debug.Log("reacting");
+				if(playerHealth.currentHealth > 0){
+					float distance = Vector3.Distance (player.transform.position, transform.position);
+					if (distance < dangerDistance) {//Verifica si puede intentar atacar al jugador
+						navMesh.speed = 20.0f;
+					} else if (distance < chaseRange) {//verifica que persigue al jugador
+						navMesh.destination = player.transform.position;
+						anim.walk ();
 					}
+				} else {
+					anim.wait ();	
 				}
-				if (avoider.ShouldReact ()) {
-					avoider.lastReact = Time.fixedTime;
-					if (isAttacking) {
-						distance = Vector3.Distance (player.transform.position, transform.position);
-						if(canAttack (distance)){
-							Debug.Log("atacando");
-							Attack ();
-						}
-					} else {
-						Debug.Log("moviendome lejos del jugador");
-						moveAway(player.transform.position);
-					}	
-				}
-			} else if (distance < chaseRange) {
-				navMesh.destination = player.transform.position;
-				anim.walk ();
-			} else {
-				anim.wait ();	
+				avoider.lastReact = Time.fixedTime;
 			}
 		}
 	}
+	
+	void Attack ()
+	{
+		Debug.Log("Attacking");
+		LookAt ();
+		navMesh.Stop();
+		anim.hit();
+		playerHealth.TakeDamage(attackDamage,gameObject);
+		attackTime = Time.time + anim.getCurrentClipLength();
+	}
+
 	
 	void LookAt ()
 	{
 		var rotation = Quaternion.LookRotation (player.transform.position - transform.position);
 		transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.deltaTime * rotationDamping);
-	}
-	
-	void Attack ()
-	{
-		if (isAttacking) {
-			LookAt ();
-			navMesh.Stop();
-			anim.hit();
-			hasAttacked = playerHealth.TakeDamage(attackDamage,gameObject);
-			attackTime = Time.time + anim.getCurrentClipLength();
-		}
-	}
-	
-	void moveAway(Vector3 position){
-		playerHealth.CancelAttack(gameObject);
-		navMesh.destination = Vector3.Cross(Vector3.up, position).normalized;
-		navMesh.Resume();
-		anim.walk();
-		awayTime = Time.time + attackRate;
-	}
-	
-	bool canAttack(float distance){
-		return playerInRange && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0;
 	}
 }

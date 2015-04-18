@@ -7,11 +7,9 @@ public class EnemyAnimator : MonoBehaviour
 		public AudioClip roarAudio;
 		public AudioClip attackAudio;
 		public Animator anim;
-		private GameObject player;
 	
 		void Awake ()
 		{
-				player = GameObject.FindGameObjectWithTag ("Player");
 				anim = GetComponent <Animator> ();
 		}
 	
