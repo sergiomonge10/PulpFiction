@@ -1,28 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class BossHealth : MonoBehaviour
 {
-	public int startingHealth = 10;
+	public int startingHealth;
 	public int currentHealth;
 	public float sinkSpeed = 2.5f;
 	public int scoreValue = 10;
-	//public AudioClip deathClip;
 	
 	
 	Animator anim;
-	//AudioSource enemyAudio;
-	//ParticleSystem hitParticles;
-	//CapsuleCollider capsuleCollider;
 	bool isDead;
 	bool isSinking;
-	
+	public Slider healthSlider = null;
+
 	void Awake ()
 	{
 		anim = GetComponent <Animator> ();
-		//enemyAudio = GetComponent <AudioSource> ();
-		//hitParticles = GetComponentInChildren <ParticleSystem> ();
-		//capsuleCollider = GetComponent <CapsuleCollider> ();
-		
+		startingHealth = 100;
 		currentHealth = startingHealth;
 		
 	}
@@ -34,6 +31,7 @@ public class BossHealth : MonoBehaviour
 		{
 			transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
 		}
+		healthSlider.value = currentHealth;
 	}
 	
 	
@@ -41,14 +39,10 @@ public class BossHealth : MonoBehaviour
 	{
 		if(isDead)
 			return;
-		
-		//enemyAudio.Play ();
+
 		
 		currentHealth -= amount;
-		
-		//hitParticles.transform.position = hitPoint;
-		//hitParticles.Play();
-		
+	
 		if(currentHealth <= 0)
 		{
 			Death ();
@@ -59,16 +53,8 @@ public class BossHealth : MonoBehaviour
 	void Death ()
 	{
 		isDead = true;
-		
-		//capsuleCollider.isTrigger = true;
-		//Destroy (gameObject, 2f);
 		anim.SetBool ("Death", true);
-		/**
-		if (!anim.GetCurrentAnimatorStateInfo ().IsName ("Boss1_death")) {
-			Destroy (gameObject, 2f);
-		}**/
-		//enemyAudio.clip = deathClip;
-		//enemyAudio.Play ();
+
 	}
 	
 

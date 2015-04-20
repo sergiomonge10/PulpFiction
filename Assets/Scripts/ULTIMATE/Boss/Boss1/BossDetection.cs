@@ -11,12 +11,14 @@ public class BossDetection : MonoBehaviour
 	private Animator anim;
 	private GameObject player;
 	private SphereCollider col;
+	GameObject bosshealth;
 	
 	void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player"); //Set up the tags!
 		anim = GetComponent<Animator>();
 		col = GetComponent<SphereCollider>();
+		bosshealth = GameObject.FindGameObjectWithTag ("BossSlider");
 	}
 	
 	void Update()
@@ -34,17 +36,15 @@ public class BossDetection : MonoBehaviour
 			float angle = Vector3.Angle(direction, transform.forward);
 			
 			Debug.DrawRay(transform.position + transform.up / 2, direction, Color.green);
+			bosshealth.SetActive(true);
 			
 			if(angle < fieldOfView)
 			{
 				RaycastHit hit;
-				Debug.Log("Angulo correcto");
 				if(Physics.Raycast(transform.position + transform.up / 2, direction, out hit, col.radius, ignoreRaycast))
 				{
-					Debug.Log("Raycast correcto");
 					if(hit.collider.gameObject == player)
 					{
-						Debug.Log("Colision exitosa");
 						playerDetected = true;	
 					}
 				}
@@ -57,6 +57,7 @@ public class BossDetection : MonoBehaviour
 		if(other.gameObject == player)
 		{
 			playerDetected = false;
+			bosshealth.SetActive(false);
 		}
 	}
 }

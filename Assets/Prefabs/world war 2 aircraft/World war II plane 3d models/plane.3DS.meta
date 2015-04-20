@@ -1,0 +1,82 @@
+fileFormatVersion: 2
+guid: 32ccc81bec64cc742b269c5949643652
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: B3
+    100002: //RootNode
+    100004: Plane 3d m
+    100006: Tyer
+    100008: tyer
+    400000: B3
+    400002: //RootNode
+    400004: Plane 3d m
+    400006: Tyer
+    400008: tyer
+    2300000: B3
+    2300002: Plane 3d m
+    2300004: Tyer
+    2300006: tyer
+    3300000: B3
+    3300002: Plane 3d m
+    3300004: Tyer
+    3300006: tyer
+    4300000: Tyer
+    4300002: B3
+    4300004: tyer
+    4300006: Plane 3d m
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

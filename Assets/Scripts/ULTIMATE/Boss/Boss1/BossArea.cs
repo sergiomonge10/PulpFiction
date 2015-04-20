@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BossArea : MonoBehaviour {
 
-	public bool onAttackRange{ get; set;}
+	public bool onAttackRange;
 
 	// Use this for initialization
 	void Start () {
@@ -21,13 +21,4 @@ public class BossArea : MonoBehaviour {
 		}
 
 	}
-
-	void OnTriggerExit(Collider col){
-		if (col.tag == "Player" || col.tag== "Boss") {
-			Debug.Log("saliendo del colider");
-			onAttackRange = false;
-		}
-
-	}
-	
 }

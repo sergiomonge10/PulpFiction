@@ -12,14 +12,9 @@ public class BossAttack : MonoBehaviour {
 
 
 	void Awake(){
-		bossArea = (BossArea)GameObject.FindGameObjectWithTag ("BossArea").GetComponent<BossArea>();
-		hitScript = (HitScript) GameObject.FindGameObjectWithTag("Boss").GetComponent<HitScript>();
-
-		boss = GameObject.FindGameObjectWithTag("Boss");
-		player = GameObject.FindGameObjectWithTag ("Player");
-
-
-		anim = boss.GetComponent<Animator>();
+		bossArea = (BossArea)this.GetComponent<BossArea>();
+		hitScript = (HitScript)this.GetComponent<HitScript> ();
+		anim = this.GetComponent<Animator>();
 	}
 
 	// Use this for initialization
@@ -29,12 +24,14 @@ public class BossAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (bossArea.onAttackRange == true) {
-				Debug.Log ("Rango= " + bossArea.onAttackRange);
+		if (bossArea != null) {
+			if(bossArea.onAttackRange == true) {
 				anim.SetBool ("Attack", true);
-		} else {
-			anim.SetBool("Attack", false);
-		}
+				if(hitScript.hitting== true){
+					anim.SetBool("Attack", false);
+				}
+			} 
+		} 
 
 		}
 }

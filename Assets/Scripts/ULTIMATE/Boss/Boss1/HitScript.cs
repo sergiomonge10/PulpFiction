@@ -8,7 +8,7 @@ public class HitScript : MonoBehaviour {
 	private GameObject player;
 	private PlayerHealth playerHealth;
 	private int damage= 50;
-	public bool hitting{ get; set;}
+	public bool hitting;
 	// Use this for initialization
 
 	void Start () {
@@ -28,13 +28,41 @@ public class HitScript : MonoBehaviour {
 			anim.SetBool ("Charging", false);
 			//anim.SetBool("Hit",true);
 			Debug.Log ("Choco contra jugador");
-			//bossCharging.charging = false;
 			if(playerHealth!=null && playerHealth.currentHealth > 0){
 				playerHealth.TakeDamage (damage, gameObject);
+				hitting= true;
+				anim.SetBool("Hitting", true);
 			}
 
 		}
 	}
+
+	void collisionWithPlayer(bool col){
+		if (col == true) {
+			Debug.Log("Llegue");
+			hitting= true;
+			anim.SetBool("Backoff", true);
+			playerHealth.TakeDamage (damage, gameObject);
+		}
+
+	}
+
+	void collisionExitWithPlayer(bool col){
+		if (col == true) {
+			hitting= false;
+			anim.SetBool("Backoff", false);
+		}
+		
+	}
+
+	void OnCollisionExit(Collision collisionInfo) {
+		if (collisionInfo.gameObject.tag == "Player") {
+			hitting= false;
+			anim.SetBool("Hitting",false);
+		}
+	}
+
+
 
 
 }

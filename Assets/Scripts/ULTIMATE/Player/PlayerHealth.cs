@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
 	bool isDead;
 	bool damaged;
 	double Timer = 0.0;
+	GameObject bosshealth;
 	
 	void Awake ()
 	{
@@ -34,8 +35,14 @@ public class PlayerHealth : MonoBehaviour
 		currentHealth = startingHealth;
 		attackers = new List<GameObject>();
 		StartCoroutine(addHealth());
+		bosshealth = GameObject.FindGameObjectWithTag ("BossSlider");
+
+		if (bosshealth != null) {
+			bosshealth.SetActive(false);
+		}
+
 	}
-	
+
 	
 	void Update ()
 	{
