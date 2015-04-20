@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
 		
 		if(currentHealth <= 0 && !isDead)
 		{
-			Death ();
+			//Death ();
 		}
 		//if (attacker.tag == "Demon") {
 		//	attackers.Remove (attacker);

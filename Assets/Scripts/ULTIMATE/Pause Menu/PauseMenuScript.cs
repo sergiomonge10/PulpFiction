@@ -4,9 +4,12 @@ using System.Collections;
 public class PauseMenuScript : MonoBehaviour {
 
 	GameObject pauseMenu = null;
+	GameObject camera = null;
+	private bool _mouseOver = false;
 
 	void Start () {
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
+		camera = GameObject.FindGameObjectWithTag ("MainCamera");
 		if (pauseMenu != null) {
 			pauseMenu.SetActive(false);
 		}
@@ -17,9 +20,24 @@ public class PauseMenuScript : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			//show the pause menu
 			ShowPauseMenu();
+			camera.GetComponent<MouseLook>().enabled = false;
+			camera.GetComponent<MouseAimCamera>().enabled = false;
 		}
 	}
 	
+	void OnGUI()
+	{
+		if(!_mouseOver) return;
+		//draw your GUI stuff here with Unity's OnGUI code - see ref for details
+	}
+	void OnMouseOver()
+	{
+		_mouseOver = true;
+	}
+	void OnMouseExit()
+	{
+		_mouseOver = false;
+	}
 	void ShowPauseMenu(){
 		if (pauseMenu != null) {
 			pauseMenu.SetActive (!pauseMenu.GetActive ());
@@ -34,6 +52,8 @@ public class PauseMenuScript : MonoBehaviour {
 
 	public void ResumeGame(){
 		ShowPauseMenu();
+		camera.GetComponent<MouseLook>().enabled = true;
+		camera.GetComponent<MouseAimCamera>().enabled = true;
 	}
 
 	public void QuitGame(){

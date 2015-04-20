@@ -3,11 +3,16 @@ using System.Collections;
 
 public class ButtonClicked : MonoBehaviour {
 	GameObject options = null;
+	GameObject background = null;
 	// Use this for initialization
 	void Start () {
 		options = GameObject.FindGameObjectWithTag ("Options");
-		if (options != null) {
+		background = GameObject.FindGameObjectWithTag ("BackgroundMainMenuImage");
+
+		if (options != null && background != null) {
 			options.SetActive(false);
+			background.SetActive(false);
+
 		}
 	}
 	
@@ -25,8 +30,9 @@ public class ButtonClicked : MonoBehaviour {
 	}
 
 	public void ShowOptions(){
-		if (options != null) {
+		if (options != null && background != null) {
 			options.SetActive (!options.GetActive ());
+			background.SetActive(!background.GetActive());
 		}
 	}
 }

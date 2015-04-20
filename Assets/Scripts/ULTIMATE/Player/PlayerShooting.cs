@@ -6,6 +6,7 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
 	public int current_bullets = 100; 
+	Boss3_health boss3health;
 
     float timer;
     Ray shootRay;
@@ -24,6 +25,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
+		boss3health = GameObject.FindGameObjectWithTag ("Boss").GetComponent<Boss3_health> ();
     }
 
 
@@ -88,6 +90,11 @@ public class PlayerShooting : MonoBehaviour
 					Debug.Log("Pegando al boss");
 					bossHealth.TakeDamage (damagePerShot, shootHit.point);
 					gunLine.SetPosition (1, shootHit.point);
+				}
+				if(boss3health != null){
+					boss3health.TakeDamage(damagePerShot);
+					gunLine.SetPosition (1, shootHit.point);
+
 				}
 			}
 		}
