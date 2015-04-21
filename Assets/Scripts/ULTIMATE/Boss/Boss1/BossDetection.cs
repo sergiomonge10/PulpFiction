@@ -5,7 +5,7 @@ public class BossDetection : MonoBehaviour
 {
 	public LayerMask ignoreRaycast; //Set up the layers!
 	
-	public float fieldOfView = 80.0f;
+	public float fieldOfView = 30.0f;
 	public bool playerDetected;
 	
 	private Animator anim;
@@ -60,4 +60,5 @@ public class BossDetection : MonoBehaviour
 			bosshealth.SetActive(false);
 		}
 	}
+	
 }

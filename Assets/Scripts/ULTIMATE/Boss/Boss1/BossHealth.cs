@@ -12,7 +12,7 @@ public class BossHealth : MonoBehaviour
 	
 	
 	Animator anim;
-	bool isDead;
+	public bool isDead;
 	bool isSinking;
 	public Slider healthSlider = null;
 
@@ -55,6 +55,10 @@ public class BossHealth : MonoBehaviour
 		isDead = true;
 		anim.SetBool ("Death", true);
 
+	}
+
+	public bool getIsDead(){
+		return this.isDead;
 	}
 	
 

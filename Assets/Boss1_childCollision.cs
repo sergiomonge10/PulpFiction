@@ -24,4 +24,10 @@ public class Boss1_childCollision : MonoBehaviour {
 			SendMessageUpwards("collisionExitWithPlayer", true);
 		}
 	}
+
+	void OnTriggerStay(Collider col){
+		if (col.transform.tag == "Player") {
+			Debug.Log("Pegado");
+		}
+	}
 }

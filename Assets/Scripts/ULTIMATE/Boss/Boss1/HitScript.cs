@@ -7,7 +7,7 @@ public class HitScript : MonoBehaviour {
 	private BossCharging bossCharging;
 	private GameObject player;
 	private PlayerHealth playerHealth;
-	private int damage= 50;
+	private int damage= 10;
 	public bool hitting;
 	// Use this for initialization
 
@@ -16,6 +16,7 @@ public class HitScript : MonoBehaviour {
 		anim = boss.GetComponent<Animator>();
 		bossCharging = boss.GetComponent<BossCharging> ();
 		player= GameObject.FindGameObjectWithTag("Player");
+
 		if (player != null) {
 			playerHealth = (PlayerHealth) player.GetComponent<PlayerHealth>();
 		}
@@ -39,10 +40,9 @@ public class HitScript : MonoBehaviour {
 
 	void collisionWithPlayer(bool col){
 		if (col == true) {
-			Debug.Log("Llegue");
 			hitting= true;
-			anim.SetBool("Backoff", true);
-			playerHealth.TakeDamage (damage, gameObject);
+//			anim.SetBool("Backoff", true);
+			playerHealth.TakeDamage (damage, this.gameObject);
 		}
 
 	}
@@ -60,6 +60,10 @@ public class HitScript : MonoBehaviour {
 			hitting= false;
 			anim.SetBool("Hitting",false);
 		}
+	}
+
+	void backOff(){
+		anim.SetBool ("Backoff", true);
 	}
 
 

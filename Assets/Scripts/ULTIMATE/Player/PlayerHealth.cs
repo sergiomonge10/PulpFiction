@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 	AudioSource playerAudio;
 	PlayerMovement playerMovement;
 	PlayerShooting playerShooting;
-	bool isDead;
+	public bool isDead;
 	bool damaged;
 	double Timer = 0.0;
 	GameObject bosshealth;
@@ -35,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
 		currentHealth = startingHealth;
 		attackers = new List<GameObject>();
 		StartCoroutine(addHealth());
+		isDead = false;
 		bosshealth = GameObject.FindGameObjectWithTag ("BossSlider");
 
 		if (bosshealth != null) {
@@ -70,21 +71,17 @@ public class PlayerHealth : MonoBehaviour
 	
 	public bool TakeDamage (int amount,GameObject attacker)
 	{
+		Debug.Log("Bjando daño");
 		damaged = true;
 		
 		currentHealth -= amount;
 		
 		healthSlider.value = currentHealth;
 		
-		//playerAudio.Play ();
-		
 		if(currentHealth <= 0 && !isDead)
 		{
-			//Death ();
+			Death ();
 		}
-		//if (attacker.tag == "Demon") {
-		//	attackers.Remove (attacker);
-		//}
 
 		
 		return true;
@@ -94,12 +91,7 @@ public class PlayerHealth : MonoBehaviour
 	void Death ()
 	{
 		isDead = true;
-		
-		//playerMovement.enabled = false;
-		//playerShooting.enabled = false;
 		anim.SetBool ("Die", true);
-		//Debug.Log(anim.GetCurrentAnimatorStateInfo(0).fullPathHash());
-		//Destroy (gameObject, 2f);
 	}
 	
 	

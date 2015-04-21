@@ -12,7 +12,6 @@ public class ButtonClicked : MonoBehaviour {
 		if (options != null && background != null) {
 			options.SetActive(false);
 			background.SetActive(false);
-
 		}
 	}
 	
