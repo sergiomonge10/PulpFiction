@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 	private List<GameObject> attackers;
 	public int simultaneousAttackers = 2;
 	public float recuperationSpeed=6.0f;
+
 	
 	Animator anim;
 	AudioSource playerAudio;
@@ -25,6 +26,10 @@ public class PlayerHealth : MonoBehaviour
 	bool damaged;
 	double Timer = 0.0;
 	GameObject bosshealth;
+	GameOver gameOver;
+	GameObject camara = null;
+	GameObject healthUI= null;
+	GameObject bullets= null;
 	
 	void Awake ()
 	{
@@ -37,6 +42,10 @@ public class PlayerHealth : MonoBehaviour
 		StartCoroutine(addHealth());
 		isDead = false;
 		bosshealth = GameObject.FindGameObjectWithTag ("BossSlider");
+		gameOver = (GameOver)GameObject.FindGameObjectWithTag ("Floor").GetComponent<GameOver> ();
+		healthUI = GameObject.FindGameObjectWithTag ("EvanHealthUI");
+		bullets = GameObject.FindGameObjectWithTag ("Bullets");
+		camara = GameObject.FindGameObjectWithTag ("MainCamera");
 
 		if (bosshealth != null) {
 			bosshealth.SetActive(false);
@@ -92,6 +101,11 @@ public class PlayerHealth : MonoBehaviour
 	{
 		isDead = true;
 		anim.SetBool ("Die", true);
+		gameOver.ShowGameOver ();
+		camara.GetComponent<MouseLook>().enabled = false;
+		camara.GetComponent<MouseAimCamera>().enabled = false;
+		healthUI.SetActive(false);
+		bullets.SetActive(false);
 	}
 	
 	
