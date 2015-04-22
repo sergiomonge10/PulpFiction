@@ -68,7 +68,9 @@ public class EnemyHealthMultiplayer : MonoBehaviour
 	{
 		// The enemy is dead.
 		isDead = true;
-		
+		GameObject score = GameObject.FindGameObjectWithTag("Score");
+		scoreValue += 10;
+		score.BroadcastMessage ("updateScore", this.scoreValue, SendMessageOptions.DontRequireReceiver);
 		// Turn the collider into a trigger so shots can pass through it.
 		capsuleCollider.isTrigger = true;
 		
@@ -78,6 +80,7 @@ public class EnemyHealthMultiplayer : MonoBehaviour
 		// Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
 		enemyAudio.clip = deathClip;
 		enemyAudio.Play ();
+		Destroy (gameObject, 2f);
 	}
 	
 	public void StartSinking ()
@@ -92,7 +95,7 @@ public class EnemyHealthMultiplayer : MonoBehaviour
 		isSinking = true;
 		
 		// Increase the score by the enemy's score value.
-		ScoreManagerMultiplayer.score += scoreValue;
+//		ScoreManagerMultiplayer.score += scoreValue;
 		
 		// After 2 seconds destory the enemy.
 		Destroy (gameObject, 2f);

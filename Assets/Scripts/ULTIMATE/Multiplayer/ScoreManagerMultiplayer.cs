@@ -4,17 +4,16 @@ using System.Collections;
 
 public class ScoreManagerMultiplayer : MonoBehaviour
 {
-	public static int score;        // The player's score.
+	public int score;        // The player's score.
 	
 	
 	Text text;                      // Reference to the Text component.
+
 	
-	
-	void Awake ()
+	void Start()
 	{
 		// Set up the reference.
 		text = GetComponent <Text> ();
-		
 		// Reset the score.
 		score = 0;
 	}
@@ -23,6 +22,12 @@ public class ScoreManagerMultiplayer : MonoBehaviour
 	void Update ()
 	{
 		// Set the displayed text to be the word "Score" followed by the score value.
-		text.text = "Score: " + score;
+		if(text != null)
+			text.text = "Score: " + score;
+		Debug.Log ("Score: " + score);
+	}
+	public void updateScore(int enemyScore){
+		this.score += enemyScore;
+		Debug.Log ("score pdated" + this.score);
 	}
 }

@@ -65,7 +65,8 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider.isTrigger = true;
 
         anim.SetTrigger ("Dead");
-
+		GameObject score = GameObject.FindGameObjectWithTag("Score");
+		score.BroadcastMessage ("updateScore", this.scoreValue, SendMessageOptions.DontRequireReceiver);
 
 		Destroy (gameObject, 2f);
 		

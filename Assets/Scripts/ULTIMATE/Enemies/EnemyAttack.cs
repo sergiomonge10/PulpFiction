@@ -36,13 +36,15 @@ public class EnemyAttack : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		//Si es el jugador atacamos si tenemos permisos para atacar
-		if (other.gameObject.CompareTag ("Player") && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {//if its prepare to attack
-			Attack ();
-		} else if (other.gameObject.CompareTag (avoider.packTag) && !isAttacking) {// si es otro enemigo ajustamos las velocidades para que se alejen
-			navMesh.speed = Random.Range (1.0f, 4.0f);
-		} else if (playerHealth.currentHealth < 0) {// si el jugador esta muerto esperamos
-			navMesh.Stop();
-			anim.wait ();
+		if (other != null && other.gameObject != null) {
+			if (other.gameObject.CompareTag ("Player") && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {//if its prepare to attack
+				Attack ();
+			} else if (other.gameObject.CompareTag (avoider.packTag) && !isAttacking) {// si es otro enemigo ajustamos las velocidades para que se alejen
+				navMesh.speed = Random.Range (1.0f, 4.0f);
+			} else if (playerHealth.currentHealth < 0) {// si el jugador esta muerto esperamos
+				navMesh.Stop ();
+				anim.wait ();
+			}
 		}
 	}
 	
@@ -67,8 +69,10 @@ public class EnemyAttack : MonoBehaviour
 					if (distance < dangerDistance) {//Verifica si puede intentar atacar al jugador
 						navMesh.speed = 20.0f;
 					} else if (distance < chaseRange) {//verifica que persigue al jugador
+						if(navMesh.enabled){
 						navMesh.destination = player.transform.position;
 						anim.walk ();
+						}
 					}
 				} else {
 					anim.wait ();	

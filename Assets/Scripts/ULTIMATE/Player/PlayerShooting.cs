@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
-		boss3health = GameObject.FindGameObjectWithTag ("Boss").GetComponent<Boss3_health> ();
+		//boss3health = GameObject.FindGameObjectWithTag ("Boss").GetComponent<Boss3_health> ();
     }
 
 
