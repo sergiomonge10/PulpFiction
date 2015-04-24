@@ -30,9 +30,10 @@ public class Boss1_childCollision : MonoBehaviour {
 			Debug.Log("Pegado");
 		}
 	}
-
+	/**
 
 	void TakeDamage(int ammount){
 		SendMessageUpwards("TakeDamage", ammount);
 	}
+	**/
 }
