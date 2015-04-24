@@ -25,30 +25,27 @@ public class HitScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.tag == "Player") {
+		if (collision.gameObject.tag == "Player" && anim != null) {
 			anim.SetBool ("Charging", false);
 			//anim.SetBool("Hit",true);
 			Debug.Log ("Choco contra jugador");
-			if(playerHealth!=null && playerHealth.currentHealth > 0){
-				playerHealth.TakeDamage (damage, gameObject);
-				hitting= true;
-				anim.SetBool("Hitting", true);
-			}
-
+			collision.gameObject.BroadcastMessage("TakeDamage",damage);
+			hitting= true;
+			anim.SetBool("Hitting", true);
 		}
 	}
 
-	void collisionWithPlayer(bool col){
-		if (col == true) {
+	void collisionWithPlayer(GameObject obj){
+		if (obj != null && anim != null) {
 			hitting= true;
 //			anim.SetBool("Backoff", true);
-			playerHealth.TakeDamage (damage, this.gameObject);
+			obj.BroadcastMessage("TakeDamage",damage); 
 		}
 
 	}
 
-	void collisionExitWithPlayer(bool col){
-		if (col == true) {
+	void collisionExitWithPlayer(GameObject obj){
+		if (obj != null && anim != null) {
 			hitting= false;
 			anim.SetBool("Backoff", false);
 		}
@@ -56,14 +53,16 @@ public class HitScript : MonoBehaviour {
 	}
 
 	void OnCollisionExit(Collision collisionInfo) {
-		if (collisionInfo.gameObject.tag == "Player") {
+		if (collisionInfo.gameObject.tag == "Player" && anim != null) {
 			hitting= false;
 			anim.SetBool("Hitting",false);
 		}
 	}
 
 	void backOff(){
-		anim.SetBool ("Backoff", true);
+		if (anim != null) {
+			anim.SetBool ("Backoff", true);
+		}
 	}
 
 

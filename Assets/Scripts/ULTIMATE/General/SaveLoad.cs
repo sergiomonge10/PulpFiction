@@ -24,10 +24,11 @@ public class SaveLoad : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(int level) {
-		if (level > 0 && level < 4 && PlayerPrefs.GetInt("LevelName") == level) {
+		if (level > 1 && level < 5 && PlayerPrefs.GetInt("LevelName") == level) {
 			canLoadPosition = true;
 			loadLevel = false;
 		}
+		Time.timeScale = 1;
 	}
 
 	public void SavePlayer(){
@@ -61,5 +62,13 @@ public class SaveLoad : MonoBehaviour {
 
 	public void LoadSavedLevel(){
 		Application.LoadLevel(PlayerPrefs.GetInt("LevelName"));
+	}
+
+	public void LoadCurrentLevel(){
+		Application.LoadLevel (Application.loadedLevel);
+	}
+
+	public void LoadMainMenu(){
+		Application.LoadLevel(1);
 	}
 }

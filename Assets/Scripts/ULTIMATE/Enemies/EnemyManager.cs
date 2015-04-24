@@ -27,14 +27,22 @@ public class EnemyManager : MonoBehaviour {
 	void SpawnEnemies ()
 	{
 		if (this.spawnEnemies && !this.enemiesHaveSpawn) {
-			Debug.Log("Spawning first set of enemies");
 			if (this.playerHealth.currentHealth <= 0) {
 					return;		
 			}
-			for(int i=1; i<spawnPoints.Length+1 ; i++){//We instantiate first number of enemies on each spawn point
-				int enemySpawnPoint = i%spawnPoints.Length;
-				Instantiate (enemy, spawnPoints [enemySpawnPoint].position, spawnPoints [enemySpawnPoint].rotation);
-				this.quantity--;
+			if(quantity >= spawnPoints.Length){
+				for(int i=1; i<spawnPoints.Length+1 ; i++){//We instantiate first number of enemies on each spawn point
+					int enemySpawnPoint = i%spawnPoints.Length;
+					Instantiate (enemy, spawnPoints [enemySpawnPoint].position, spawnPoints [enemySpawnPoint].rotation);
+					this.quantity--;
+				}
+			}else{
+				int remaining = quantity;
+				for(int i=1; i<remaining+1 ; i++){//We instantiate first number of enemies on each spawn point
+					int enemySpawnPoint = i%spawnPoints.Length;
+					Instantiate (enemy, spawnPoints [enemySpawnPoint].position, spawnPoints [enemySpawnPoint].rotation);
+					this.quantity--;
+				}
 			}
 
 			if(quantity <= 0){//if quantity reach to 0 then we don't have more enemies to spawn

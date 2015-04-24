@@ -37,7 +37,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount, Vector3 hitPoint)
+    public void TakeDamage (int amount)
     {
         if(isDead)
             return;
@@ -66,8 +66,9 @@ public class EnemyHealth : MonoBehaviour
 
         anim.SetTrigger ("Dead");
 		GameObject score = GameObject.FindGameObjectWithTag("Score");
-		score.BroadcastMessage ("updateScore", this.scoreValue, SendMessageOptions.DontRequireReceiver);
-
+		if (score != null) {
+			score.BroadcastMessage ("updateScore", this.scoreValue, SendMessageOptions.DontRequireReceiver);
+		}
 		Destroy (gameObject, 2f);
 		
         //enemyAudio.clip = deathClip;

@@ -15,13 +15,13 @@ public class Boss1_childCollision : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.transform.tag == "Player") {
-			SendMessageUpwards("collisionWithPlayer", true);
+			SendMessageUpwards("collisionWithPlayer", col.gameObject);
 		}
 	}
 
 	void OnTriggerExit(Collider col){
 		if (col.transform.tag == "Player") {
-			SendMessageUpwards("collisionExitWithPlayer", true);
+			SendMessageUpwards("collisionExitWithPlayer", col.gameObject);
 		}
 	}
 
@@ -29,5 +29,10 @@ public class Boss1_childCollision : MonoBehaviour {
 		if (col.transform.tag == "Player") {
 			Debug.Log("Pegado");
 		}
+	}
+
+
+	void TakeDamage(int ammount){
+		SendMessageUpwards("TakeDamage", ammount);
 	}
 }

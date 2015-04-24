@@ -16,7 +16,7 @@ public class test : MonoBehaviour {
 
 	void OnTriggerStay(Collider col){
 		if (col.tag == "Player") {
-			playerScript.TakeDamage(2,this.gameObject);	
+			col.gameObject.BroadcastMessage("TakeDamage",2);
 		}
 	}
 }

@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
 	}
 	
 	
-	public bool TakeDamage (int amount,GameObject attacker)
+	public bool TakeDamage (int amount)
 	{
 		Debug.Log("Bjando daño");
 		damaged = true;

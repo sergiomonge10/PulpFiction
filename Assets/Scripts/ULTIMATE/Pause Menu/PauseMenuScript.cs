@@ -7,22 +7,12 @@ public class PauseMenuScript : MonoBehaviour {
 	GameObject pauseMenu = null;
 	GameObject camera = null;
 	private bool _mouseOver = false;
-	GameObject btnContinue = null;
-	GameObject btnMainMenu = null;
-	GameObject btnSave = null;
-	GameObject btnLoad = null;
-	GameObject btnExit = null;
 	GameObject healthUI= null;
 	GameObject bullets= null;
 
 	void Start () {
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		camera = GameObject.FindGameObjectWithTag ("MainCamera");
-		btnContinue = GameObject.FindGameObjectWithTag ("PauseMenuContinue");
-		btnMainMenu = GameObject.FindGameObjectWithTag ("PauseMenuMainMenu");
-		btnSave = GameObject.FindGameObjectWithTag ("PauseMenuSave");
-		btnLoad = GameObject.FindGameObjectWithTag ("PauseMenuLoad");
-		btnExit = GameObject.FindGameObjectWithTag ("PauseMenuExit");
 		healthUI = GameObject.FindGameObjectWithTag ("EvanHealthUI");
 		bullets = GameObject.FindGameObjectWithTag ("Bullets");
 
@@ -36,10 +26,7 @@ public class PauseMenuScript : MonoBehaviour {
 		if(Input.GetKeyDown("escape")) {
 			//show the pause menu
 			ShowPauseMenu();
-			camera.GetComponent<MouseLook>().enabled = false;
-			camera.GetComponent<MouseAimCamera>().enabled = false;
-			healthUI.SetActive(false);
-			bullets.SetActive(false);
+
 		}
 	}
 	
@@ -60,20 +47,32 @@ public class PauseMenuScript : MonoBehaviour {
 		if (pauseMenu != null) {
 			pauseMenu.SetActive (!pauseMenu.GetActive ());
 			if(pauseMenu.GetActive()){
-				Time.timeScale = 0f;
+				StopGame();
 			}else{
-				Time.timeScale = 1f;
+				ContinueGame();
 			}
 
 		}
 	}
 
-	public void ResumeGame(){
-		ShowPauseMenu();
+	public void StopGame(){
+		Time.timeScale = 0f;
+		camera.GetComponent<MouseLook>().enabled = false;
+		camera.GetComponent<MouseAimCamera>().enabled = false;
+		healthUI.SetActive(false);
+		bullets.SetActive(false);
+	}
+
+	public void ContinueGame(){
+		Time.timeScale = 1f;
 		camera.GetComponent<MouseLook>().enabled = true;
 		camera.GetComponent<MouseAimCamera>().enabled = true;
 		healthUI.SetActive(true);
 		bullets.SetActive(true);
+	}
+
+	public void ResumeGame(){
+		ShowPauseMenu();
 	}
 
 	public void QuitGame(){
@@ -81,6 +80,6 @@ public class PauseMenuScript : MonoBehaviour {
 	}
 
 	public void MainMenu(){
-		Application.LoadLevel(0);
+		Application.LoadLevel(1);
 	}
 }

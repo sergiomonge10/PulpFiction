@@ -36,11 +36,11 @@ public class EnemyAttack : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		//Si es el jugador atacamos si tenemos permisos para atacar
-		if (other != null && other.gameObject != null) {
+		if (other != null && other.gameObject != null && this.navMesh.enabled) {
 			if (other.gameObject.CompareTag ("Player") && enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {//if its prepare to attack
-				Attack ();
+				Attack (other.gameObject);
 			} else if (other.gameObject.CompareTag (avoider.packTag) && !isAttacking) {// si es otro enemigo ajustamos las velocidades para que se alejen
-				navMesh.speed = Random.Range (1.0f, 4.0f);
+				navMesh.speed = Random.Range (1.0f, 10.0f);
 			} else if (playerHealth.currentHealth < 0) {// si el jugador esta muerto esperamos
 				navMesh.Stop ();
 				anim.wait ();
@@ -50,9 +50,9 @@ public class EnemyAttack : MonoBehaviour
 	
 	void OnTriggerExit (Collider other)
 	{
-		if (other.transform.tag == "Player") {
+		if (other.transform.tag == "Player" && this.navMesh.enabled) {
 			if(playerHealth.currentHealth > 0){//si el jugador esta vivo y se aleja se cambia la velocidad y deja de atacar
-				navMesh.speed =  Random.Range(1.0f,4.0f);
+				navMesh.speed =  Random.Range(1.0f,10.0f);
 				navMesh.destination = player.transform.position;
 			}else{// si el jugador esta muerto y se aleja, esperamos
 				navMesh.Stop();
@@ -61,9 +61,8 @@ public class EnemyAttack : MonoBehaviour
 	}
 	
 	void Update (){
-		if (Time.time > attackTime) {//Si esta attacando esperamos a que termine la accion
+		if (Time.time > attackTime && this.navMesh.enabled) {//Si esta attacando esperamos a que termine la accion
 			if (avoider.ShouldReact ()) {//Wait time para bajar el nivel de requests y procesamiento
-				Debug.Log("reacting");
 				if(playerHealth.currentHealth > 0){
 					float distance = Vector3.Distance (player.transform.position, transform.position);
 					if (distance < dangerDistance) {//Verifica si puede intentar atacar al jugador
@@ -82,14 +81,15 @@ public class EnemyAttack : MonoBehaviour
 		}
 	}
 	
-	void Attack ()
+	void Attack (GameObject obj)
 	{
-		Debug.Log("Attacking");
 		LookAt ();
-		navMesh.Stop();
-		anim.hit();
-		playerHealth.TakeDamage(attackDamage,gameObject);
-		attackTime = Time.time + anim.getCurrentClipLength();
+		if (this.navMesh.enabled) {
+			this.navMesh.Stop ();
+		}
+		this.anim.hit();
+		this.attackTime = Time.time + this.anim.getCurrentClipLength();
+		obj.BroadcastMessage ("TakeDamage", this.attackDamage);
 	}
 
 	

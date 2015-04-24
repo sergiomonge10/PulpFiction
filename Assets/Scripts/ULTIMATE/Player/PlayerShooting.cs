@@ -75,27 +75,8 @@ public class PlayerShooting : MonoBehaviour
         shootRay.direction = transform.forward;
 
         if (Physics.Raycast (shootRay, out shootHit, range, shootableMask)) {
-			EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
-			BossHealth bossHealth = shootHit.collider.GetComponent <BossHealth> ();
-			Debug.Log("hitting " + shootHit.collider.tag);
-			if (shootHit.collider.tag == "Demon") {
-				if (enemyHealth != null) {
-					Debug.Log("Pegando al enemigo");
-					enemyHealth.TakeDamage (damagePerShot, shootHit.point);
-					gunLine.SetPosition (1, shootHit.point);
-				}
-			}
-			if (shootHit.collider.tag == "Boss") {
-				if (bossHealth != null) {
-					bossHealth.TakeDamage (damagePerShot, shootHit.point);
-					gunLine.SetPosition (1, shootHit.point);
-				}
-				if(boss3health != null){
-					boss3health.TakeDamage(damagePerShot);
-					gunLine.SetPosition (1, shootHit.point);
-
-				}
-			}
+			shootHit.collider.gameObject.BroadcastMessage("TakeDamage",damagePerShot,SendMessageOptions.DontRequireReceiver);
+			gunLine.SetPosition (1, shootHit.point);
 		}
         else
         {

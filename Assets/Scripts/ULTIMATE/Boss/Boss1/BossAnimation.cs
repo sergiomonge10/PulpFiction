@@ -37,6 +37,7 @@ public class BossAnimation : MonoBehaviour {
 			angle = 0.0f;
 
 		}
+
 		animSetup.Setup(angle);
 	}
 
