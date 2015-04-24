@@ -13,24 +13,27 @@ public class ScoreManagerMultiplayer : MonoBehaviour
 	
 	void Start()
 	{
+		gameover = GameObject.FindGameObjectWithTag("GameOver");
 		// Set up the reference.
 		text = GetComponent <Text> ();
-		playerHealth = this.GetComponent<PlayerHealth> ();
-		gameover = GameObject.FindGameObjectWithTag("GameOver");
+		if (this != null) {
+			playerHealth = this.GetComponent<PlayerHealth> ();
+		}
 		playerUI = GameObject.FindGameObjectWithTag ("PlayerUI");
 		// Reset the score.
 		score = 0;
-		gameover.SetActive (false);
 
 	}
 	
 	
 	void Update ()
-	{
+	{	if (this != null) {
+			playerHealth = this.GetComponent<PlayerHealth> ();
+		}
 		// Set the displayed text to be the word "Score" followed by the score value.
 		if(text != null)
 			text.text = "Score: " + score;
-		Debug.Log ("Score: " + score);
+		Debug.Log (this.gameObject);
 
 		if (playerHealth.currentHealth <= 0) {
 			gameover.SetActive(true);

@@ -8,14 +8,15 @@ public class PlayerHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 	public Slider healthSlider;
-	public Image damageImage;
-	public Image skull;
+	public GameObject damageImage;
+	public GameObject skull;
 	public AudioClip deathClip;
 	public float flashSpeed = 5f;
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 	private List<GameObject> attackers;
 	public int simultaneousAttackers = 2;
 	public float recuperationSpeed=6.0f;
+	GameObject gameOver;
 
 	
 	Animator anim;
@@ -26,7 +27,6 @@ public class PlayerHealth : MonoBehaviour
 	bool damaged;
 	double Timer = 0.0;
 	GameObject bosshealth;
-	GameOver gameOver;
 	GameObject camara = null;
 	GameObject healthUI= null;
 	GameObject bullets= null;
@@ -41,8 +41,11 @@ public class PlayerHealth : MonoBehaviour
 		attackers = new List<GameObject>();
 		StartCoroutine(addHealth());
 		isDead = false;
+		healthSlider = (Slider)GameObject.FindGameObjectWithTag ("PlayerHealthSlider").GetComponent<Slider>();
+		damageImage = GameObject.FindGameObjectWithTag ("DamageImage");
 		bosshealth = GameObject.FindGameObjectWithTag ("BossSlider");
-		gameOver = (GameOver)GameObject.FindGameObjectWithTag ("Floor").GetComponent<GameOver> ();
+		skull = GameObject.FindGameObjectWithTag ("Skull");
+		gameOver = GameObject.FindGameObjectWithTag ("GameOver");
 		healthUI = GameObject.FindGameObjectWithTag ("EvanHealthUI");
 		bullets = GameObject.FindGameObjectWithTag ("Bullets");
 		camara = GameObject.FindGameObjectWithTag ("MainCamera");
@@ -50,6 +53,8 @@ public class PlayerHealth : MonoBehaviour
 		if (bosshealth != null) {
 			bosshealth.SetActive(false);
 		}
+
+		gameOver.SetActive (false);
 
 	}
 
@@ -66,14 +71,14 @@ public class PlayerHealth : MonoBehaviour
 		
 		if(damaged)
 		{
-			damageImage.color = flashColour;
-			skull.color = Color.red; 
+			damageImage.GetComponent<Image>().color = flashColour;
+			skull.GetComponent<Image>().color = Color.red; 
 			Timer = 0.0;
 		}
 		else
 		{
-			damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-			skull.color = Color.white;
+			damageImage.GetComponent<Image>().color = Color.Lerp (damageImage.GetComponent<Image>().color, Color.clear, flashSpeed * Time.deltaTime);
+			skull.GetComponent<Image>().color = Color.white;
 		}
 		damaged = false;
 	}
@@ -102,11 +107,12 @@ public class PlayerHealth : MonoBehaviour
 	{
 		isDead = true;
 		anim.SetBool ("Die", true);
-		gameOver.ShowGameOver ();
+		gameOver.GetComponent<GameOver> ().ShowGameOver();
 		camara.GetComponent<MouseLook>().enabled = false;
 		camara.GetComponent<MouseAimCamera>().enabled = false;
 		healthUI.SetActive(false);
 		bullets.SetActive(false);
+		gameOver.SetActive (true);
 	}
 	
 	
