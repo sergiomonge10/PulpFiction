@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
 	
 	public bool TakeDamage (int amount)
 	{
-		Debug.Log("Bjando daño");
+		Debug.Log("Bajando daño");
 		damaged = true;
 		
 		currentHealth -= amount;

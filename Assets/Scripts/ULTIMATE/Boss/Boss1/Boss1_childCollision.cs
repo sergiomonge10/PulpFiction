@@ -15,7 +15,9 @@ public class Boss1_childCollision : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.transform.tag == "Player") {
-			SendMessageUpwards("collisionWithPlayer", col.gameObject);
+			SendMessageUpwards("collisionWithPlayer", col.gameObject, SendMessageOptions.DontRequireReceiver);
+			transform.parent.gameObject.GetComponent<HitScript>().collisionWithPlayer(col.gameObject);
+			//Debug.Log("Hitting player");
 		}
 	}
 
@@ -27,7 +29,9 @@ public class Boss1_childCollision : MonoBehaviour {
 
 	void OnTriggerStay(Collider col){
 		if (col.transform.tag == "Player") {
-			Debug.Log("Pegado");
+			SendMessageUpwards("collisionExitWithPlayer", col.gameObject, SendMessageOptions.DontRequireReceiver);
+			//transform.parent.gameObject.GetComponent<HitScript>().collisionWithPlayer(col.gameObject);
+
 		}
 	}
 	/**

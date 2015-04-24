@@ -12,9 +12,8 @@ public class HitScript : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		GameObject boss = GameObject.FindGameObjectWithTag ("Boss");
-		anim = boss.GetComponent<Animator>();
-		bossCharging = boss.GetComponent<BossCharging> ();
+		anim = this.GetComponent<Animator>();
+		bossCharging = this.GetComponent<BossCharging> ();
 		player= GameObject.FindGameObjectWithTag("Player");
 
 		if (player != null) {
@@ -35,11 +34,14 @@ public class HitScript : MonoBehaviour {
 		}
 	}
 
-	void collisionWithPlayer(GameObject obj){
-		if (obj != null && anim != null) {
+	public void collisionWithPlayer(GameObject obj){
+		if (obj != null) {
 			hitting= true;
 //			anim.SetBool("Backoff", true);
-			obj.BroadcastMessage("TakeDamage",damage); 
+			Debug.Log("Bajando vida");
+			Debug.Log(playerHealth);
+			playerHealth.TakeDamage(damage);
+			//obj.BroadcastMessage("TakeDamage",damage); 
 		}
 
 	}
