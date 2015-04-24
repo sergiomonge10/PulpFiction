@@ -32,6 +32,7 @@ public class BossHealth : MonoBehaviour
 			transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
 		}
 		healthSlider.value = currentHealth;
+
 	}
 	
 	

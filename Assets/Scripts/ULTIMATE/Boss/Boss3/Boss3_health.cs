@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Boss3_health : MonoBehaviour {
 
@@ -7,6 +8,7 @@ public class Boss3_health : MonoBehaviour {
 	public int currentHealth;
 	Animator boss3Anim;
 	bool isDead;
+	public Slider slider;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,7 @@ public class Boss3_health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		slider.value= currentHealth;
 		Death ();
 	}
 
@@ -32,6 +35,7 @@ public class Boss3_health : MonoBehaviour {
 	void Death(){
 		if (currentHealth <= 0) {
 			isDead= true;
+			Application.LoadLevel (10);
 			boss3Anim.SetBool("Die", isDead);
 			//StartCoroutine(waitForClip());
 			transform.renderer.enabled= false;

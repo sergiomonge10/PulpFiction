@@ -6,15 +6,18 @@ public class ScreenFade : MonoBehaviour {
 		GameObject screenPrefab;
 		public float fadeSpeed = 0.5f;          // Speed that the screen fades to and from black.
 		private bool sceneStarting = true;      // Whether or not the scene is still fading in.
-		
+		GameObject enemyUI;	
+
 		void Awake ()
 		{
 
 			screenPrefab = GameObject.FindGameObjectWithTag("PlayerUI");
+			enemyUI	= GameObject.FindGameObjectWithTag("EnemyHealthUI");
 			// Set the texture so that it is the the size of the screen and covers it.
 			guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
 			// If the scene is starting...
 			if (sceneStarting && screenPrefab!=null) {
+				enemyUI.SetActive(false);
 				screenPrefab.SetActive(false);
 				// The scene is no longer starting.
 				sceneStarting = false;
@@ -39,6 +42,7 @@ public class ScreenFade : MonoBehaviour {
 				guiTexture.color = Color.clear;
 				guiTexture.enabled = false;
 				screenPrefab.SetActive(true);
+				enemyUI.SetActive(true);
 		}
 		}
 		
@@ -70,6 +74,7 @@ public class ScreenFade : MonoBehaviour {
 				guiTexture.color = Color.clear;
 				guiTexture.enabled = false;
 				screenPrefab.SetActive(true);
+				enemyUI.SetActive(true);
 			}
 		}
 }

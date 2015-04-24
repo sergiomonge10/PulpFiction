@@ -58,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		Timer += Time.deltaTime; //Time.deltaTime will increase the value with 1 every second.
 		// If the player has just been damaged...
+		addHealth ();
 		
 		if(Timer >= 5.0){
 			Timer = 0.0;
@@ -140,7 +141,7 @@ public class PlayerHealth : MonoBehaviour
 		while (true){ // loops forever...
 			if(!damaged && Timer >= recuperationSpeed){
 				if (currentHealth < 100){ // if health < 100...
-					// yield new WaitForSeconds(5);
+					//yield new WaitForSeconds(5);
 					currentHealth += 10; // increase health and wait the specified time
 					healthSlider.value = currentHealth;
 				} else { 
