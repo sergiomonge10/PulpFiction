@@ -8,7 +8,7 @@ public class ScreenFade : MonoBehaviour {
 		private bool sceneStarting = true;      // Whether or not the scene is still fading in.
 		GameObject enemyUI;	
 
-		void Awake ()
+		void Start ()
 		{
 
 			screenPrefab = GameObject.FindGameObjectWithTag("PlayerUI");
@@ -28,7 +28,7 @@ public class ScreenFade : MonoBehaviour {
 	
 	
 		void OnLevelWasLoaded(int level) {
-			if (level > 0 && level < 4 && PlayerPrefs.GetInt("LevelName") != level) {
+			if (level > 2 && level < 5 && PlayerPrefs.GetInt("LevelName") != level) {
 				sceneStarting = true;
 			}
 		}

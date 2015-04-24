@@ -23,7 +23,7 @@ public class PauseMenuScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown("escape")) {
+		if(Input.GetKeyDown(KeyCode.Escape)) {
 			//show the pause menu
 			ShowPauseMenu();
 
